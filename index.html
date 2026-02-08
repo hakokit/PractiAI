@@ -37,6 +37,10 @@
             --text-main: #ffffff;
             --text-muted: #b0b0b0;
             --danger: #ff5555;
+            --google-blue: #4285F4;
+            --google-red: #DB4437;
+            --google-yellow: #F4B400;
+            --google-green: #0F9D58;
         }
 
         * {
@@ -627,6 +631,95 @@
 
         .visual-text h2 { font-size: 3rem; margin-bottom: 10px; }
 
+        /* --- TESTIMONIALS (NEW!) --- */
+        .testimonials {
+            padding: 100px 0;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+        }
+
+        .reviews-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 5px;
+            scroll-snap-type: x mandatory;
+            /* Hide scrollbar */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        
+        .reviews-container::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .review-card {
+            background: #161616;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 30px;
+            min-width: 300px;
+            max-width: 350px;
+            flex-shrink: 0;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 45px;
+            height: 45px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .review-meta h4 {
+            font-size: 1rem;
+            margin: 0;
+            color: #fff;
+        }
+
+        .review-meta span {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .stars {
+            color: var(--google-yellow);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .google-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
         /* --- PRICING / SOLUTIONS --- */
         .pricing { padding: 120px 0; }
         .pricing-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; margin-top: 60px; }
@@ -737,6 +830,7 @@
             .price-card.featured { transform: scale(1); margin: 20px 0; }
             header { padding: 60px 20px; }
             .visual-break { height: 250px; background-attachment: scroll; } /* Disable parallax on mobile for performance */
+            .reviews-container { padding-right: 20px; } /* Peek effect */
         }
     </style>
 </head>
@@ -949,6 +1043,54 @@
             <div class="cta-strip reveal delay-200">
                 <a href="https://wa.me/972506915269?text=היי טל, אני רוצה לבדוק התאמה לארגון שלנו" target="_blank" class="btn btn-outline">
                     <i class="fa-brands fa-whatsapp"></i> בואו נבדוק התאמה לארגון שלכם
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS (NEW!) -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">מה אומרים הלקוחות?</h2>
+            <p class="section-subtitle reveal">אלפי בוגרים ומנהלים כבר עברו את התהליך. הנה מה שהם חושבים.</p>
+            
+            <div class="reviews-container reveal delay-100">
+                
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="google-badge"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg></div>
+                    <div class="review-header">
+                        <div class="review-avatar">N</div>
+                        <div class="review-meta">
+                            <h4>נתן דקלה</h4>
+                            <span>לפני חודש</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"חלק מתהליך פיתוח והטמעת AI בחברת תמוז, העביר אצלנו טל הדרכה מקצועית בנושא AI. ההדרכה היתה ברמה גבוהה, מעשית, ברורה ונתנה לכלל המשתתפים כלים יישומיים שאפשר ליישם מיידית בשטח.
+                    טל הפגין מומחיות עמוקה לצד יכולת הסברה בגובה העיניים, סבלנות, ושילוב מצוין בין תיאוריה לפרקטיקה. חברי ההנהלה שלהם היתה מיועדת ההדרכה ציינו כי ההדרכה היתה מהטובות שעברו — עניינית, מדויקת ומותאמת לצרכי הארגון.
+                    ממליצה על טל בחום לכל ארגון המחפש מדריך מקצועי, פרקטי ושירותי בתחום ה-AI."</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="google-badge"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg></div>
+                    <div class="review-header">
+                        <div class="review-avatar">L</div>
+                        <div class="review-meta">
+                            <h4>Liri Mor</h4>
+                            <span>לפני חודשיים</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"הייתה לנו סדנה של שעה וחצי עם טל, בזום, באנגלית, עם 70 עובדים מכל העולם. רמת הרלוונטיות והמעורבות של המשתתפים הייתה הכי גבוהה שראיתי בסדנה בזום. ההנחיה הייתה מאוד נעימה, ברורה, פרקטית, עם הפסקות לאורך הדרך שבהן הלומדים התנסו גם בכלי AI תוך כדי. גם אם מדובר בכלים שהלומדים כבר הכירו, טל חידש לכולנו וחשף אותנו לפונקציות ממש משמעותיות שלא לומדים בכל סדנה. היו המון המון תגובות נלהבות ובטוח נשמח להזמין אותו לעוד סדנאות בעתיד!"</p>
+                </div>
+
+            </div>
+
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="https://share.google/t7VW7kdjq7BccnHmJ" target="_blank" class="btn btn-outline" style="font-size: 0.9rem;">
+                    לקריאת כל הביקורות בגוגל <i class="fa-brands fa-google"></i>
                 </a>
             </div>
         </div>
