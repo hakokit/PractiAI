@@ -3,141 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>הכשרות GenAI לעובדים - טל חקוקי</title>
+    <title>PractiAI | טל חקוקי - הכשרות GenAI לארגונים</title>
     
     <!-- גופנים -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- אייקונים -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #111; /* רקע כהה */
-            color: #fff;
-            font-family: 'Heebo', sans-serif;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #161616;
+            --accent: #deff9a; /* ירוק ניאון */
+            --accent-glow: rgba(222, 255, 154, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { line-height: 1.1; margin-bottom: 1rem; }
+        .highlight { color: var(--accent); }
+        .text-center { text-align: center; }
+        
+        /* --- UTILS --- */
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 10px 20px; /* הקטנת המרווחים העליונים והתחתונים */
-            flex: 1;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px rgba(222, 255, 154, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(222, 255, 154, 0.1);
+            color: #fff;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            padding: 80px 0;
+            text-align: center;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center; /* מרכוז האלמנטים */
+            position: relative;
+            background: radial-gradient(circle at center, #1f1f1f 0%, #0a0a0a 70%);
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(transparent, rgba(0,0,0,0.8));
+            pointer-events: none;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 25px;
+            border: 1px solid rgba(222, 255, 154, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         h1 {
-            color: #deff9a; /* ירוק זרחני בסגנון המצגת הקודמת */
-            font-size: 2rem; /* הקטנת הכותרת כדי לחסוך מקום */
-            margin-bottom: 5px;
-            line-height: 1.2;
-        }
-
-        p.subtitle {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-
-        /* תיקון: שימוש ב-aspect-ratio והגבלת גובה כדי למנוע גלילה וקפיצות */
-        .presentation-wrapper {
+            font-size: 3.8rem;
+            font-weight: 900;
+            max-width: 950px;
+            margin: 0 auto 20px;
+            letter-spacing: -1px;
             position: relative;
-            width: 100%;
-            max-width: 1000px; /* הגבלת רוחב כדי שלא יהיה ענק במסכים רחבים */
-            aspect-ratio: 16 / 9; /* שמירה על יחס תמונה 16:9 מודרני */
-            max-height: 60vh; /* הגבלת גובה ל-60% מהמסך - זה הפתרון לקפיצות! */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            padding: 100px 0;
+            background-color: #0f0f0f;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        /* השינוי כאן: מעבר מ-Grid ל-Flexbox כדי לאפשר מירכוז */
+        .features-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            transition: 0.3s;
+            height: 100%;
+            
+            /* הגדרות גודל חדשות */
+            flex: 1 1 300px; /* מינימום 300 פיקסל, גדל אם יש מקום */
+            max-width: 380px; /* מניעת מתיחה מוגזמת כשיש כרטיס בודד */
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            background: linear-gradient(180deg, #1a1a1a 0%, #161616 100%);
+        }
+
+        .icon-box {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            background: rgba(222, 255, 154, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* --- PRICING --- */
+        .pricing {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .pricing-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            align-items: stretch;
+            margin-top: 60px;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid #333;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 300px;
+            max-width: 380px;
+            transition: transform 0.3s ease;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--accent);
+            background: #121212;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            z-index: 2;
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            padding: 5px 25px;
+            font-weight: 800;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            margin: 20px 0 10px;
+            line-height: 1;
+        }
+
+        .price span {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 30px 0 40px;
+            flex-grow: 1;
+        }
+
+        .feature-list li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #ddd;
+            font-size: 1.05rem;
+        }
+
+        .feature-list i {
+            color: var(--accent);
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq-section {
+            padding: 80px 0;
+            background-color: #0e0e0e;
+        }
+        
+        .faq-container {
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .presentation-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        details {
+            background: #1a1a1a;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
         }
 
-        /* כפתור הנעה לפעולה */
-        .cta-section {
-            margin-top: 25px;
-            padding-bottom: 20px;
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .cta-button {
-            background-color: #deff9a;
-            color: #000;
-            font-size: 1.3rem; /* הקטנה קלה להתאמה לפרופורציות החדשות */
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            color: var(--accent);
+            font-size: 1.5rem;
             font-weight: 900;
-            padding: 15px 40px;
-            border-radius: 50px;
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        details[open] {
+            border-color: var(--accent);
+        }
+
+        .faq-content {
+            padding: 0 20px 20px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 100px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            background: #222;
+            padding: 20px 30px;
+            border-radius: 12px;
             text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 0 15px rgba(222, 255, 154, 0.3);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+            border: 1px solid #333;
         }
 
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(222, 255, 154, 0.6);
+        .contact-item:hover {
+            border-color: var(--accent);
+            background: #2a2a2a;
         }
 
-        .footer {
-            margin-top: auto;
-            padding: 15px;
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
             color: #555;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+            background: #0a0a0a;
         }
 
-        /* התאמה לנייד */
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            h1 { font-size: 1.5rem; }
-            .cta-button { font-size: 1.1rem; padding: 12px 30px; width: 100%; box-sizing: border-box; }
-            .presentation-wrapper { max-height: none; } /* בנייד אין בעיית גובה כמו במחשב, אז משחררים את ההגבלה */
+            header { padding: 60px 0; }
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            
+            .price-card.featured { transform: scale(1); margin: 20px 0; order: -1; }
+            
+            .pricing-wrapper { display: flex; flex-direction: column; align-items: center; }
+            .price-card { width: 100%; max-width: 100%; }
+            
+            /* התאמת רספונסיביות גם ליתרונות */
+            .features-wrapper { display: flex; flex-direction: column; align-items: center; }
+            .feature-card { width: 100%; max-width: 100%; }
+
+            .contact-grid { flex-direction: column; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- כותרת עליונה -->
-        <h1>הפוך את העובדים לצוות-על בעזרת AI</h1>
-        <p class="subtitle">דפדף במצגת כדי לראות איך חוסכים 30% מזמן העבודה</p>
-
-        <!-- המצגת -->
-        <div class="presentation-wrapper">
-            <iframe 
-                src="https://docs.google.com/presentation/d/e/2PACX-1vQLECSQXfV46fPDyr7PaKKI7sq1j9hLXBwi3JutkB3Xpku8DGtz-ykA7FzgNtQ09uUZ-FVK5doIZUX9/pubembed?start=false&loop=false&delayms=10000" 
-                allowfullscreen="true" 
-                mozallowfullscreen="true" 
-                webkitallowfullscreen="true">
-            </iframe>
+    <!-- HERO SECTION -->
+    <header>
+        <div class="container">
+            <div class="badge"><i class="fa-solid fa-star"></i> השיטה שהוטמעה ב-200+ ארגונים</div>
+            <h1>
+                הפוך את העובדים ל"צוות-על"<br>
+                שחוסך <span class="highlight">30% מזמן העבודה</span>
+            </h1>
+            <p class="subtitle">
+                בלי תיאוריות, בלי בזבוז זמן, ועם תהליך עבודה (Workflow) שלם שכל עובד בונה ומיישם כבר בסוף יום ההכשרה.
+            </p>
+            <div style="margin-top: 30px;">
+                <a href="#pricing" class="btn btn-primary">
+                    <i class="fa-solid fa-rocket"></i>
+                    אני רוצה לראות את המסלולים
+                </a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #777;">
+                <i class="fa-solid fa-check" style="color: var(--accent);"></i> מתאים לכל רמות העובדים &nbsp;|&nbsp; 
+                <i class="fa-solid fa-check" style="color: var(--accent);"></i> יישום מיידי וללא התקנות
+            </p>
         </div>
+    </header>
 
-        <!-- כפתור יצירת קשר -->
-        <div class="cta-section">
-            <a href="https://wa.me/972506915269" class="cta-button" target="_blank">
-                תיאום שיחת התאמה בווטסאפ 
+    <!-- 3 BENEFITS -->
+    <section class="features">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 60px;">3 דברים שאתם מקבלים <span class="highlight">(ולמה זה עובד)</span></h2>
+            <!-- Wrapper מעודכן ל-Flexbox -->
+            <div class="features-wrapper">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>תוצאה מיידית</h3>
+                    <p>כל עובד יוצא מההדרכה עם תהליך עבודה (Workflow) אחד שלם מקצה לקצה – בנוי, מוכן ופועל, שחוסך לו שעות של אדמיניסטרציה.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>אפס סיכון וטעויות</h3>
+                    <p>במקום שעובדים יעשו ניסויים מסוכנים במידע ארגוני, הם מקבלים תבניות בטיחות מוכנות ומדיניות ברורה השומרת על המידע שלכם.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="icon-box"><i class="fa-solid fa-trophy"></i></div>
+                    <h3>מוכח בשטח</h3>
+                    <p>השיטה פותחה ע"י טל חקוקי, ראש תחום GenAI במרכז כנרת, נוסתה ושופרה מול מאות ארגונים מהמגזר הפרטי והציבורי.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="text-center">בחרו את רמת היישום המתאימה</h2>
+            <p class="text-center subtitle">שקיפות מלאה. אין אותיות קטנות.</p>
+            
+            <div class="pricing-wrapper">
+                
+                <!-- Plan 1 -->
+                <div class="price-card">
+                    <h3>GenAI Essentials</h3>
+                    <p style="color: #888;">הזינוק המהיר לצוותים</p>
+                    <div class="price">7,000₪<span>+ מע"מ</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-clock"></i> חצי יום (3 שעות)</li>
+                        <li><i class="fa-solid fa-users"></i> עד 30 עובדים</li>
+                        <li><i class="fa-solid fa-check"></i> יישור קו והיכרות עם הכלים</li>
+                        <li><i class="fa-solid fa-check"></i> פרומפטינג ואבטחת מידע</li>
+                    </ul>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לשמוע פרטים על סדנת Essentials" target="_blank" class="btn btn-outline">זה מעניין אותי</a>
+                </div>
+
+                <!-- Plan 2 (Featured) -->
+                <div class="price-card featured">
+                    <div class="card-tag">הכי נמכר 🔥</div>
+                    <h3>Pro Builder Workshop</h3>
+                    <p style="color: #ccc;">המסלול השלם לשינוי אמיתי</p>
+                    <div class="price">9,500₪<span>+ מע"מ</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-clock"></i> <strong>יום מלא (5 שעות)</strong></li>
+                        <li><i class="fa-solid fa-plus"></i> כל תכני ה-Essentials</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles"></i> <strong>בניית Workflow מלא לכל עובד</strong></li>
+                        <li><i class="fa-solid fa-puzzle-piece"></i> פירוק משימות והרכבה עם AI</li>
+                        <li><i class="fa-solid fa-rocket"></i> יישום פרקטי בזמן אמת</li>
+                    </ul>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לשמוע פרטים על סדנת Pro Builder" target="_blank" class="btn btn-primary">בוא נשריין תאריך</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="price-card">
+                    <h3>Strategic Impact</h3>
+                    <p style="color: #888;">מעטפת אסטרטגית להנהלה</p>
+                    <div class="price">12,500₪<span>+ מע"מ</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> סדנת Essentials לעובדים</li>
+                        <li><i class="fa-solid fa-video"></i> <strong>5 מפגשי ייעוץ (זום)</strong></li>
+                        <li><i class="fa-solid fa-map"></i> מפת הזדמנויות ארגונית</li>
+                        <li><i class="fa-solid fa-file-shield"></i> בניית מסמך מדיניות AI</li>
+                        <li><i class="fa-solid fa-user-tie"></i> ליווי מנהלים ומובילי שינוי</li>
+                    </ul>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לשמוע פרטים על מסלול Strategic Impact" target="_blank" class="btn btn-outline">לפרטים נוספים</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION (HANDLING OBJECTIONS) -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 40px;">שאלות נפוצות</h2>
+            <div class="faq-container">
+                <details>
+                    <summary>האם העובדים צריכים ידע טכני מוקדם?</summary>
+                    <div class="faq-content">
+                        ממש לא. השיטה בנויה כך שכל עובד, גם ללא רקע טכנולוגי, יוכל להבין וליישם את הכלים. אנחנו מתחילים מהבסיס ומגיעים לתוצרים מתקדמים בשפה פשוטה וברורה.
+                    </div>
+                </details>
+                <details>
+                    <summary>האם זה בטוח להשתמש במידע ארגוני?</summary>
+                    <div class="faq-content">
+                        חד משמעית - כחלק מההדרכה אנחנו שמים דגש עצום על אבטחת מידע, פרטיות, ושימוש במודלים שאינם "לומדים" מהמידע שלכם (בהתאם לכלים שנבחרו בארגון). תקבלו נהלים ברורים מה מותר ומה אסור.
+                    </div>
+                </details>
+                <details>
+                    <summary>מה ההבדל בין סדנת חצי יום ליום מלא?</summary>
+                    <div class="faq-content">
+                        בסדנת חצי יום לומדים "איך להשתמש". בסדנת יום מלא לומדים "איך לבנות". ביום המלא אנחנו מקדישים זמן לתרגול מעמיק שבו כל עובד בונה תהליך עבודה אמיתי שרלוונטי לתפקיד שלו, ויוצא עם תוצר מוכן.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section class="contact-section">
+        <div class="container">
+            <h2>המהלך הבא שלך</h2>
+            <p class="subtitle">אל תבזבז זמן על התלבטויות. בוא נבדוק ב-15 דקות אם אנחנו מתאימים.</p>
+            
+            <a href="https://wa.me/972506915269?text=היי טל, הגעתי דרך דף הנחיתה ואשמח לתאם שיחה" target="_blank" class="btn btn-primary" style="font-size: 1.5rem;">
                 <i class="fa-brands fa-whatsapp"></i>
+                תיאום שיחת התאמה בווטסאפ
             </a>
-            <p style="margin-top: 10px; font-size: 16px; color: #aaa;">או חייג: 050-6915269</p>
-        </div>
-    </div>
 
-    <div class="footer">
-        © טל חקוקי - מנהל תחום GenAI במרכז כנרת לחדשנות
-    </div>
+            <div class="contact-grid">
+                <a href="tel:0506915269" class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    050-6915269
+                </a>
+                <a href="mailto:hakokit@gmail.com" class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    hakokit@gmail.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>
+                <strong>PractiAI</strong> &copy; 2024 טל חקוקי - מנהל תחום GenAI במרכז כנרת לחדשנות.<br>
+                כל הזכויות שמורות.
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
