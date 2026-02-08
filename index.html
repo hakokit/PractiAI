@@ -73,9 +73,10 @@
             100% { opacity: 0.6; }
         }
 
-        @keyframes glowBorder {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 0 0 rgba(222, 255, 154, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(222, 255, 154, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(222, 255, 154, 0); }
         }
 
         /* Scroll Reveal Class - JS will add 'active' */
@@ -159,6 +160,18 @@
             background: rgba(222, 255, 154, 0.05);
         }
 
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #20BA56;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+            transform: translateY(-2px);
+        }
+
         /* --- HERO SECTION --- */
         header {
             min-height: 95vh;
@@ -232,8 +245,28 @@
             font-size: 1.4rem;
             color: var(--text-muted);
             max-width: 800px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             font-weight: 300;
+        }
+
+        .hero-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-contact-info i {
+            color: var(--accent);
         }
 
         /* --- SOCIAL PROOF BAR --- */
@@ -476,7 +509,7 @@
             transform: scale(1.05);
         }
 
-        /* --- PRICING --- */
+        /* --- PRICING / SOLUTIONS --- */
         .pricing { padding: 120px 0; }
         .pricing-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; margin-top: 60px; }
         
@@ -498,26 +531,37 @@
             transform: translateY(-5px);
         }
 
+        /* Featured Card Effect - Breathing Glow */
         .price-card.featured {
             border: 2px solid var(--accent);
             background: #151515;
             transform: scale(1.05);
             z-index: 2;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            animation: glowPulse 3s infinite;
         }
 
         .price-card.featured:hover {
             transform: scale(1.05) translateY(-5px);
+            animation: none;
+            box-shadow: 0 0 50px rgba(222, 255, 154, 0.2);
         }
 
-        .price-header { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 25px; }
-        .price-num { font-size: 3rem; font-weight: 900; color: #fff; line-height: 1; }
-        .price-sub { font-size: 1rem; color: #888; margin-top: 5px; display: block; }
+        .price-header { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 25px; text-align: center; }
+        .price-header h3 { font-size: 1.8rem; margin-bottom: 10px; color: #fff; }
+        .price-header p { color: #888; font-size: 1.1rem; }
         
+        .price-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
         .deliverables { margin: 25px 0; flex-grow: 1; }
         .deliverables h4 { font-size: 0.9rem; text-transform: uppercase; color: #666; margin-bottom: 15px; letter-spacing: 1px; }
         .del-item { display: flex; gap: 12px; margin-bottom: 15px; font-size: 1rem; color: #ddd; align-items: center; }
-        .del-item i { color: var(--accent); font-size: 1.1rem; }
+        .del-item i { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; }
 
         /* --- ABOUT --- */
         .about {
@@ -608,6 +652,12 @@
         /* --- FOOTER --- */
         footer { text-align: center; padding: 60px 0; border-top: 1px solid #222; color: #666; background: #050505; }
 
+        .cta-strip {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
         @media (max-width: 900px) {
             h1 { font-size: 2.5rem; }
             .comparison-grid, .about-grid { grid-template-columns: 1fr; }
@@ -637,9 +687,15 @@
                 <a href="#pricing" class="btn btn-primary">
                     <i class="fa-solid fa-bolt"></i> מה כוללת ההכשרה?
                 </a>
-                <a href="#about" class="btn btn-outline">
-                    קצת עליי
+                <a href="https://wa.me/972506915269?text=היי טל, אשמח לשמוע פרטים נוספים על ההכשרות" target="_blank" class="btn btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> צרו קשר בווטסאפ
                 </a>
+            </div>
+
+            <!-- Contact Info Below Buttons -->
+            <div class="hero-contact-info reveal delay-300 active">
+                <span><i class="fa-solid fa-envelope"></i> hakokit@gmail.com</span>
+                <span><i class="fa-solid fa-phone"></i> 050-6915269</span>
             </div>
         </div>
     </header>
@@ -767,6 +823,13 @@
                 </div>
 
             </div>
+
+            <!-- Extra Contact Button -->
+            <div class="cta-strip reveal delay-300">
+                <a href="https://wa.me/972506915269?text=היי טל, מעניין אותי לשמוע איך השיטה יכולה לעבוד אצלנו" target="_blank" class="btn btn-outline">
+                    <i class="fa-brands fa-whatsapp"></i> רוצה לשמוע עוד? שלח לי הודעה
+                </a>
+            </div>
         </div>
     </section>
 
@@ -786,79 +849,86 @@
                 <div class="tag">אדמיניסטרציה ותפעול</div>
                 <div class="tag">יזמים וסטארטאפים</div>
             </div>
+
+            <!-- Extra Contact Button -->
+            <div class="cta-strip reveal delay-200">
+                <a href="https://wa.me/972506915269?text=היי טל, אני רוצה לבדוק התאמה לארגון שלנו" target="_blank" class="btn btn-outline">
+                    <i class="fa-brands fa-whatsapp"></i> בואו נבדוק התאמה לארגון שלכם
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- PRICING / SOLUTIONS -->
     <section class="pricing" id="pricing">
         <div class="container">
             <h2 class="section-title reveal">מסלולי ההכשרה</h2>
-            <p class="section-subtitle reveal">השקעה ברורה ומשתלמת בפרודוקטיביות של הארגון.</p>
+            <p class="section-subtitle reveal">בחרו את הנתיב המתאים להאצת הארגון שלכם.</p>
             
             <div class="pricing-wrapper">
                 
                 <!-- Essentials -->
                 <div class="price-card reveal delay-100">
                     <div class="price-header">
+                        <i class="fa-solid fa-rocket price-icon"></i>
                         <h3>GenAI Essentials</h3>
-                        <p style="color: #666;">סדנת יישור קו והתנעה</p>
+                        <p>סדנת הזנקה ממוקדת</p>
                     </div>
-                    <div class="price-num">7,000₪</div>
-                    <span class="price-sub">+ מע"מ</span>
                     
                     <div class="deliverables">
+                        <h4>למי זה מתאים:</h4>
+                        <div class="del-item"><i class="fa-solid fa-check"></i> צוותים שצריכים יישור קו מהיר</div>
                         <h4>מה מקבלים:</h4>
                         <div class="del-item"><i class="fa-solid fa-clock"></i> מפגש ממוקד (כ-4 שעות)</div>
-                        <div class="del-item"><i class="fa-solid fa-users"></i> עד 30 משתתפים</div>
-                        <div class="del-item"><i class="fa-solid fa-check"></i> היכרות מעשית עם הכלים המובילים</div>
-                        <div class="del-item"><i class="fa-solid fa-check"></i> איך כותבים הנחיה (Prompt) שעובדת</div>
+                        <div class="del-item"><i class="fa-solid fa-bolt"></i> היכרות מעשית עם הכלים</div>
+                        <div class="del-item"><i class="fa-solid fa-pen-fancy"></i> כתיבת הנחיות (Prompts) מדויקות</div>
                         <div class="del-item"><i class="fa-solid fa-shield-halved"></i> <strong>בטיחות ופרטיות בשימוש</strong></div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, מעוניין לשמוע על סדנת Essentials" class="btn btn-outline" style="width:100%">לפרטים נוספים</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: GenAI Essentials" target="_blank" class="btn btn-outline" style="width:100%">שלחו לי את הסילבוס המלא</a>
                 </div>
 
                 <!-- Pro Builder -->
                 <div class="price-card featured reveal delay-200">
-                    <div style="position: absolute; top:0; left:0; right:0; background:var(--accent); color:black; text-align:center; font-weight:bold; font-size:0.8rem; padding:5px; border-radius: 18px 18px 0 0;">הכי מומלץ לארגונים</div>
+                    <div style="position: absolute; top:0; left:0; right:0; background:var(--accent); color:black; text-align:center; font-weight:bold; font-size:0.8rem; padding:5px; border-radius: 18px 18px 0 0;">הבחירה הפופולרית</div>
                     <div class="price-header" style="margin-top: 15px;">
+                        <i class="fa-solid fa-hammer price-icon"></i>
                         <h3>Pro Builder</h3>
-                        <p style="color: #ccc;">בונים יכולות ותוצרים בפועל</p>
+                        <p>בניית יכולות ותוצרים בפועל</p>
                     </div>
-                    <div class="price-num" style="color: var(--accent);">9,500₪</div>
-                    <span class="price-sub">+ מע"מ</span>
                     
                     <div class="deliverables">
-                        <h4>החבילה המלאה:</h4>
-                        <div class="del-item"><i class="fa-solid fa-clock"></i> <strong>יום הכשרה מלא (5 שעות)</strong></div>
-                        <div class="del-item"><i class="fa-solid fa-plus"></i> כל התכנים של סדנת הבסיס</div>
+                        <h4>למי זה מתאים:</h4>
+                        <div class="del-item"><i class="fa-solid fa-check"></i> ארגונים שרוצים תוצאות מיידיות</div>
+                        <h4>מה מקבלים:</h4>
+                        <div class="del-item"><i class="fa-solid fa-clock"></i> <strong>יום הכשרה מלא (Hands-on)</strong></div>
                         <div class="del-item"><i class="fa-solid fa-wand-magic-sparkles"></i> <strong>בניית תהליכי עבודה אישיים</strong></div>
-                        <div class="del-item"><i class="fa-solid fa-file-contract"></i> תרגול על קבצי הארגון (Excel/PDF)</div>
+                        <div class="del-item"><i class="fa-solid fa-file-contract"></i> תרגולים על מקרי בחן אמיתיים</div>
                         <div class="del-item"><i class="fa-solid fa-robot"></i> הקמת "עוזרים אישיים" (Custom GPTs)</div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, בוא נשריין תאריך ל-Pro Builder" class="btn btn-primary" style="width:100%">שריינו תאריך</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: Pro Builder" target="_blank" class="btn btn-primary" style="width:100%">בדיקת התאמה לצוות שלך</a>
                 </div>
 
-                <!-- Strategic -->
+                <!-- Enterprise Transformation -->
                 <div class="price-card reveal delay-300">
                     <div class="price-header">
-                        <h3>Strategic Impact</h3>
-                        <p style="color: #666;">הטמעה וליווי הנהלה</p>
+                        <i class="fa-solid fa-crown price-icon"></i>
+                        <h3>Enterprise Transformation</h3>
+                        <p>הטמעה אסטרטגית מקצה לקצה</p>
                     </div>
-                    <div class="price-num">12,500₪</div>
-                    <span class="price-sub">+ מע"מ</span>
                     
                     <div class="deliverables">
-                        <h4>מעטפת מלאה:</h4>
-                        <div class="del-item"><i class="fa-solid fa-chalkboard-user"></i> סדנת Essentials לעובדים</div>
-                        <div class="del-item"><i class="fa-solid fa-video"></i> <strong>5 מפגשי ייעוץ אישיים (זום)</strong></div>
-                        <div class="del-item"><i class="fa-solid fa-map-location-dot"></i> מיפוי הזדמנויות עסקיות בארגון</div>
-                        <div class="del-item"><i class="fa-solid fa-scale-balanced"></i> עזרה בבניית מדיניות AI פנימית</div>
-                        <div class="del-item"><i class="fa-solid fa-user-tie"></i> ליווי מנהלים ומובילי שינוי</div>
+                        <h4>למי זה מתאים:</h4>
+                        <div class="del-item"><i class="fa-solid fa-check"></i> הנהלות שמובילות שינוי ארגוני</div>
+                        <h4>מה מקבלים:</h4>
+                        <div class="del-item"><i class="fa-solid fa-magnifying-glass-chart"></i> <strong>אפיון צרכים ומיפוי אסטרטגי</strong></div>
+                        <div class="del-item"><i class="fa-solid fa-shield-virus"></i> התאמה למגבלות אבטחת מידע</div>
+                        <div class="del-item"><i class="fa-solid fa-network-wired"></i> הטמעת נהלים ושיטות עבודה</div>
+                        <div class="del-item"><i class="fa-solid fa-users-gear"></i> ליווי מתמשך והכשרת מובילי שינוי</div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, מעוניין בחבילה האסטרטגית" class="btn btn-outline" style="width:100%">דברו איתי</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: Enterprise Transformation" target="_blank" class="btn btn-outline" style="width:100%">תיאום שיחת אסטרטגיה</a>
                 </div>
 
             </div>
@@ -940,7 +1010,7 @@
                 <span style="color: #888; margin: 0 10px;">050-6915269</span>
             </div>
             
-            <a href="https://wa.me/972506915269?text=היי טל, אשמח לתאם שיחה" class="btn btn-primary">
+            <a href="https://wa.me/972506915269?text=היי טל, אשמח לתאם שיחה" target="_blank" class="btn btn-primary">
                 <i class="fa-brands fa-whatsapp"></i> דברו איתי בווטסאפ
             </a>
             
