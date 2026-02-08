@@ -364,7 +364,8 @@
 
         .trans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            /* שינוי קריטי: 2 טורים קבועים בדסקטופ במקום auto-fit */
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-top: 40px;
         }
@@ -730,6 +731,8 @@
         @media (max-width: 900px) {
             h1 { font-size: 2.5rem; }
             .comparison-grid, .about-grid { grid-template-columns: 1fr; }
+            /* שינוי קריטי למובייל: הופך את הגריד לטור אחד */
+            .trans-grid { grid-template-columns: 1fr; }
             .about-img-stage { height: 250px; margin-bottom: 20px; }
             .price-card.featured { transform: scale(1); margin: 20px 0; }
             header { padding: 60px 20px; }
