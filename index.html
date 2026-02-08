@@ -27,45 +27,43 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px 20px; /* הקטנת המרווחים העליונים והתחתונים */
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center; /* מרכוז האלמנטים */
         }
 
         h1 {
             color: #deff9a; /* ירוק זרחני בסגנון המצגת הקודמת */
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2rem; /* הקטנת הכותרת כדי לחסוך מקום */
+            margin-bottom: 5px;
             line-height: 1.2;
         }
 
         p.subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #ccc;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        /* טריק CSS כדי שהמצגת תהיה רספונסיבית */
+        /* תיקון: שימוש ב-aspect-ratio והגבלת גובה כדי למנוע גלילה וקפיצות */
         .presentation-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 58.5%; /* יחס גובה-רוחב של המצגת (כדי שלא יהיו שוליים שחורים) */
-            height: 0;
+            max-width: 1000px; /* הגבלת רוחב כדי שלא יהיה ענק במסכים רחבים */
+            aspect-ratio: 16 / 9; /* שמירה על יחס תמונה 16:9 מודרני */
+            max-height: 60vh; /* הגבלת גובה ל-60% מהמסך - זה הפתרון לקפיצות! */
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border-radius: 8px;
             overflow: hidden;
             background: #000;
+            margin: 0 auto;
         }
 
         .presentation-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             border: none;
@@ -73,16 +71,16 @@
 
         /* כפתור הנעה לפעולה */
         .cta-section {
-            margin-top: 40px;
-            padding-bottom: 40px;
+            margin-top: 25px;
+            padding-bottom: 20px;
         }
 
         .cta-button {
             background-color: #deff9a;
             color: #000;
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* הקטנה קלה להתאמה לפרופורציות החדשות */
             font-weight: 900;
-            padding: 20px 50px;
+            padding: 15px 40px;
             border-radius: 50px;
             text-decoration: none;
             display: inline-block;
@@ -97,15 +95,16 @@
 
         .footer {
             margin-top: auto;
-            padding: 20px;
+            padding: 15px;
             color: #555;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         /* התאמה לנייד */
         @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .cta-button { font-size: 1.2rem; padding: 15px 30px; width: 100%; box-sizing: border-box; }
+            h1 { font-size: 1.5rem; }
+            .cta-button { font-size: 1.1rem; padding: 12px 30px; width: 100%; box-sizing: border-box; }
+            .presentation-wrapper { max-height: none; } /* בנייד אין בעיית גובה כמו במחשב, אז משחררים את ההגבלה */
         }
     </style>
 </head>
@@ -114,7 +113,7 @@
     <div class="container">
         <!-- כותרת עליונה -->
         <h1>הפוך את העובדים לצוות-על בעזרת AI</h1>
-        <p class="subtitle">דפדף במצגת למטה כדי לראות איך אפשר לחסוך 30% מזמן העבודה בארגון שלך</p>
+        <p class="subtitle">דפדף במצגת כדי לראות איך חוסכים 30% מזמן העבודה</p>
 
         <!-- המצגת -->
         <div class="presentation-wrapper">
@@ -132,7 +131,7 @@
                 תיאום שיחת התאמה בווטסאפ 
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
-            <p style="margin-top: 15px; font-size: 18px;">או חייג: 050-6915269</p>
+            <p style="margin-top: 10px; font-size: 16px; color: #aaa;">או חייג: 050-6915269</p>
         </div>
     </div>
 
