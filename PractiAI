@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הכשרות GenAI לעובדים - טל חקוקי</title>
+    
+    <!-- גופנים -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111; /* רקע כהה */
+            color: #fff;
+            font-family: 'Heebo', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #deff9a; /* ירוק זרחני בסגנון המצגת הקודמת */
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* טריק CSS כדי שהמצגת תהיה רספונסיבית */
+        .presentation-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 58.5%; /* יחס גובה-רוחב של המצגת (כדי שלא יהיו שוליים שחורים) */
+            height: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .presentation-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* כפתור הנעה לפעולה */
+        .cta-section {
+            margin-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .cta-button {
+            background-color: #deff9a;
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: 900;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 15px rgba(222, 255, 154, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(222, 255, 154, 0.6);
+        }
+
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* התאמה לנייד */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .cta-button { font-size: 1.2rem; padding: 15px 30px; width: 100%; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- כותרת עליונה -->
+        <h1>הפוך את העובדים לצוות-על בעזרת AI</h1>
+        <p class="subtitle">דפדף במצגת למטה כדי לראות איך אפשר לחסוך 30% מזמן העבודה בארגון שלך</p>
+
+        <!-- המצגת -->
+        <div class="presentation-wrapper">
+            <iframe 
+                src="https://docs.google.com/presentation/d/e/2PACX-1vQLECSQXfV46fPDyr7PaKKI7sq1j9hLXBwi3JutkB3Xpku8DGtz-ykA7FzgNtQ09uUZ-FVK5doIZUX9/pubembed?start=false&loop=false&delayms=10000" 
+                allowfullscreen="true" 
+                mozallowfullscreen="true" 
+                webkitallowfullscreen="true">
+            </iframe>
+        </div>
+
+        <!-- כפתור יצירת קשר -->
+        <div class="cta-section">
+            <a href="https://wa.me/972506915269" class="cta-button" target="_blank">
+                תיאום שיחת התאמה בווטסאפ 
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <p style="margin-top: 15px; font-size: 18px;">או חייג: 050-6915269</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        © טל חקוקי - מנהל תחום GenAI במרכז כנרת לחדשנות
+    </div>
+
+</body>
+</html>
