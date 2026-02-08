@@ -334,8 +334,8 @@
             transform: rotateY(180deg);
         }
 
-        /* Auto-flip class for Mobile Scroll Interaction */
-        .flip-card.auto-flip .flip-card-inner {
+        /* JS toggled class for mobile click or auto-flip */
+        .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
 
@@ -733,7 +733,8 @@
             <h2 class="section-title reveal">למה הכשרות רגילות לא עובדות?</h2>
             <p class="section-subtitle reveal">רוב ההדרכות נשארות בשלב ההתלהבות. אנחנו מתמקדים בערך.</p>
             
-            <div class="flip-hint reveal"><i class="fa-solid fa-hand-pointer"></i> גללו למטה כדי לגלות את הפתרון</div>
+            <!-- Updated Hint Text -->
+            <div class="flip-hint reveal"><i class="fa-solid fa-hand-pointer"></i> המתינו 5 שניות או לחצו על הכרטיס כדי לגלות את הפתרון</div>
 
             <div class="flip-grid">
                 
@@ -900,7 +901,7 @@
                         <div class="del-item"><i class="fa-solid fa-shield-halved"></i> <strong>בטיחות ופרטיות בשימוש</strong></div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: GenAI Essentials" target="_blank" class="btn btn-outline" style="width:100%">שלחו לי את הסילבוס המלא</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לקבל את הסילבוס לסדנת Essentials" class="btn btn-outline" style="width:100%">שלחו לי את הסילבוס המלא</a>
                 </div>
 
                 <!-- Pro Builder -->
@@ -922,7 +923,7 @@
                         <div class="del-item"><i class="fa-solid fa-robot"></i> הקמת "עוזרים אישיים" (Custom GPTs)</div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: Pro Builder" target="_blank" class="btn btn-primary" style="width:100%">בדיקת התאמה לצוות שלך</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לתאם בדיקת התאמה למסלול Pro Builder" class="btn btn-primary" style="width:100%">בדיקת התאמה לצוות שלך</a>
                 </div>
 
                 <!-- Enterprise Transformation -->
@@ -943,7 +944,7 @@
                         <div class="del-item"><i class="fa-solid fa-users-gear"></i> ליווי מתמשך והכשרת מובילי שינוי</div>
                     </div>
                     
-                    <a href="https://wa.me/972506915269?text=היי טל, אני מעוניין לבחון את המוצר: Enterprise Transformation" target="_blank" class="btn btn-outline" style="width:100%">תיאום שיחת אסטרטגיה</a>
+                    <a href="https://wa.me/972506915269?text=היי טל, אשמח לתאם שיחת אסטרטגיה למסלול Enterprise" class="btn btn-outline" style="width:100%">תיאום שיחת אסטרטגיה</a>
                 </div>
 
             </div>
@@ -1053,9 +1054,9 @@
                     if (isTouchDevice) {
                         if (entry.target.classList.contains('flip-card')) {
                             // Delay flip slightly so they see the red side first
-                            setTimeout(() => {
-                                entry.target.classList.add('auto-flip');
-                            }, 500); 
+                            entry.target.flipTimeout = setTimeout(() => {
+                                entry.target.classList.add('flipped');
+                            }, 5000); // 5 seconds delay
                         }
                         if (entry.target.classList.contains('method-card')) {
                             entry.target.classList.add('active-mobile');
@@ -1067,10 +1068,15 @@
 
         document.querySelectorAll('.reveal, .flip-card, .method-card').forEach(el => observer.observe(el));
         
-        // Keep click listener for desktop testing or manual toggle
+        // Click listener to toggle flip manually on all devices
         document.querySelectorAll('.flip-card').forEach(card => {
             card.addEventListener('click', function() {
-                this.classList.toggle('hovered');
+                this.classList.toggle('flipped');
+                // If user manually flips, clear the auto-flip timeout if it hasn't fired yet
+                if (this.flipTimeout) {
+                    clearTimeout(this.flipTimeout);
+                    this.flipTimeout = null;
+                }
             });
         });
     </script>
