@@ -67,6 +67,17 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        @keyframes glowBorder {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
         /* Scroll Reveal Class - JS will add 'active' */
         .reveal {
             opacity: 0;
@@ -248,107 +259,201 @@
 
         .proof-item span { color: #ccc; }
 
-        /* --- COMPARISON SECTION --- */
+        /* --- COMPARISON SECTION (FLIP CARDS) --- */
         .comparison {
             padding: 120px 0;
             background: var(--bg-card);
         }
 
-        .comparison-grid {
+        .flip-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .comp-card {
-            padding: 40px;
-            border-radius: 20px;
-            height: 100%;
-            transition: transform 0.4s ease;
-            text-align: right; /* יישור לימין של כל התוכן בכרטיס */
+        .flip-card {
+            background-color: transparent;
+            height: 340px;
+            perspective: 1000px;
+            cursor: pointer;
         }
 
-        .comp-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .comp-bad {
-            background: rgba(255, 50, 50, 0.03);
-            border: 1px solid rgba(255, 50, 50, 0.1);
-        }
-
-        .comp-good {
-            background: rgba(222, 255, 154, 0.03);
-            border: 1px solid var(--accent);
+        .flip-card-inner {
             position: relative;
-            box-shadow: 0 0 30px rgba(222, 255, 154, 0.05);
-        }
-
-        .comp-good::before {
-            content: 'השיטה של PractiAI';
-            position: absolute;
-            top: -12px;
-            right: 30px;
-            background: var(--accent);
-            color: #000;
-            padding: 4px 15px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
             border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .check-list { 
-            list-style: none; 
-            margin-top: 25px; 
-            padding: 0; /* ביטול הזחה אוטומטית של רשימה */
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
         }
-        
-        .check-list li { margin-bottom: 20px; display: flex; gap: 15px; font-size: 1.1rem; align-items: flex-start; }
-        .comp-bad i { color: #ff4444; margin-top: 5px; flex-shrink: 0; }
-        .comp-good i { color: var(--accent); margin-top: 5px; flex-shrink: 0; }
 
-        /* --- METHODOLOGY --- */
-        .methodology { padding: 120px 0; }
+        /* Mobile support for click/tap */
+        .flip-card.hovered .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(145deg, #161616, #0d0d0d);
+        }
+
+        .flip-card-front h3 { color: #ff5555; font-size: 1.4rem; margin-bottom: 15px; font-weight: 800; }
+        .flip-card-front i { font-size: 3.5rem; color: #ff5555; margin-bottom: 25px; opacity: 0.8; }
+        .flip-card-front p { color: #888; font-size: 1.1rem; line-height: 1.4; }
+
+        .flip-card-back {
+            background: linear-gradient(145deg, #0d1f05, #000); /* Dark green tint */
+            border: 1px solid var(--accent);
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-back h3 { color: var(--accent); font-size: 1.4rem; margin-bottom: 15px; font-weight: 800; }
+        .flip-card-back i { font-size: 3.5rem; color: var(--accent); margin-bottom: 25px; text-shadow: 0 0 20px rgba(222, 255, 154, 0.4); }
+        .flip-card-back p { color: #eee; font-size: 1.1rem; line-height: 1.4; }
+
+        .flip-hint {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* --- METHODOLOGY (NEW GLOWING CARDS) --- */
+        .methodology { padding: 120px 0; background-color: #080808; position: relative; }
         
+        /* Grid background effect */
+        .methodology::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
         .method-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             margin-top: 60px;
+            position: relative;
+            z-index: 1;
         }
 
         .method-card {
             background: #0f0f0f;
-            padding: 40px;
+            padding: 40px 30px;
             border-radius: 20px;
             border: 1px solid #222;
             transition: all 0.4s ease;
             flex: 1 1 300px; 
-            max-width: 380px;
+            max-width: 360px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Background Number */
+        .method-card .step-number {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+            transition: all 0.4s ease;
+            z-index: 0;
         }
 
         .method-card:hover {
-            border-color: var(--accent);
             transform: translateY(-10px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(222, 255, 154, 0.1);
         }
 
-        .method-card:hover .method-icon {
-            transform: scale(1.1) rotate(5deg);
-            color: var(--accent);
+        .method-card:hover .step-number {
+            color: rgba(222, 255, 154, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* Animated border bottom on hover */
+        .method-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .method-card:hover::after {
+            transform: scaleX(1);
         }
 
         .method-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #fff;
             margin-bottom: 25px;
+            z-index: 1;
             transition: all 0.4s ease;
-            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid #333;
+        }
+
+        .method-card:hover .method-icon {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: rotateY(180deg);
+        }
+
+        .method-card h3 { 
+            position: relative; z-index: 1; font-size: 1.5rem; margin-bottom: 15px; 
+        }
+        
+        .method-card p { 
+            position: relative; z-index: 1; color: #aaa; font-size: 1.05rem; 
         }
 
         /* --- TARGET AUDIENCE --- */
@@ -551,60 +656,116 @@
         </div>
     </section>
 
-    <!-- PROBLEM VS SOLUTION -->
+    <!-- PROBLEM VS SOLUTION (FLIP CARDS) -->
     <section class="comparison">
         <div class="container">
             <h2 class="section-title reveal">למה הכשרות רגילות לא עובדות?</h2>
-            <p class="section-subtitle reveal">רוב ההדרכות נשארות בשלב ההתלהבות. כדי לייצר ערך אמיתי, צריך לעבוד אחרת.</p>
+            <p class="section-subtitle reveal">רוב ההדרכות נשארות בשלב ההתלהבות. אנחנו מתמקדים בערך.</p>
             
-            <div class="comparison-grid">
-                <!-- Old Way -->
-                <div class="comp-card comp-bad reveal delay-100">
-                    <h3>❌ הדרך הישנה (תיאורטית)</h3>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-xmark"></i> הרצאות השראה: "וואו, תראו מה זה עושה" (אבל איך משתמשים בזה?)</li>
-                        <li><i class="fa-solid fa-xmark"></i> דוגמאות כלליות שלא קשורות לעבודה שלכם</li>
-                        <li><i class="fa-solid fa-xmark"></i> פחד מאבטחת מידע שגורם לעובדים לא להשתמש בכלים</li>
-                        <li><i class="fa-solid fa-xmark"></i> יום אחרי הסדנה: חוזרים לעבוד בשיטות הישנות</li>
-                    </ul>
+            <div class="flip-hint reveal"><i class="fa-solid fa-hand-pointer"></i> עברו עם העכבר על הכרטיסים כדי לגלות את הפתרון</div>
+
+            <div class="flip-grid">
+                
+                <!-- Card 1: Methodology -->
+                <div class="flip-card reveal delay-100">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fa-solid fa-person-chalkboard"></i>
+                            <h3>הרצאות תיאורטיות</h3>
+                            <p>"וואו, תראו מה זה עושה" (אבל איך משתמשים בזה מחר בבוקר?)</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fa-solid fa-laptop-code"></i>
+                            <h3>לומדים תוך כדי עשייה</h3>
+                            <p>עבודה מעשית על המיילים, הדוחות והקבצים האמיתיים שלכם בזמן אמת.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- New Way -->
-                <div class="comp-card comp-good reveal delay-200">
-                    <h3>✅ הדרך של PractiAI (תכלס)</h3>
-                    <ul class="check-list">
-                        <li><i class="fa-solid fa-check"></i> <strong>לומדים תוך כדי עשייה:</strong> עובדים על המיילים והדוחות האמיתיים שלכם</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>התאמה אישית:</strong> בונים פרופיל עבודה אישי לכל עובד ותפקיד</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>בטוח לשימוש:</strong> מקבלים נהלי עבודה ברורים לשמירה על המידע</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>תוצרים ביד:</strong> יוצאים עם בוטים, תבניות ותהליכים עובדים</li>
-                    </ul>
+                <!-- Card 2: Relevance -->
+                <div class="flip-card reveal delay-200">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <h3>דוגמאות כלליות</h3>
+                            <p>דוגמאות גנריות שלא קשורות לתפקיד או לעולם התוכן של הארגון.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fa-solid fa-fingerprint"></i>
+                            <h3>התאמה אישית מלאה</h3>
+                            <p>בניית "פרופיל עבודה" אישי לכל עובד, מותאם לתפקיד ולסגנון שלו.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Card 3: Security -->
+                <div class="flip-card reveal delay-300">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <h3>פחד וחסימה</h3>
+                            <p>חשש כבד מאבטחת מידע שגורם לעובדים לפחד להשתמש בכלים.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fa-solid fa-check-double"></i>
+                            <h3>עבודה בטוחה (Governance)</h3>
+                            <p>קבלת נהלי עבודה ברורים: מה מותר, מה אסור ואיך שומרים על המידע.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Impact -->
+                <div class="flip-card reveal delay-100">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fa-solid fa-hourglass-end"></i>
+                            <h3>הידע מתפוגג</h3>
+                            <p>יום אחרי הסדנה: ההתלהבות יורדת וחוזרים לעבוד בשיטות הישנות.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <i class="fa-solid fa-rocket"></i>
+                            <h3>תוצרים שנשארים</h3>
+                            <p>יוצאים עם בוטים, תבניות ותהליכים מוכנים שממשיכים לעבוד בשבילכם.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- METHODOLOGY -->
+    <!-- METHODOLOGY (NEW DESIGN) -->
     <section class="methodology">
         <div class="container">
             <h2 class="section-title reveal">איך זה עובד?</h2>
             <p class="section-subtitle reveal">שיטה סדורה להטמעה שמחזיקה מעמד לאורך זמן.</p>
             
             <div class="method-wrapper">
+                
+                <!-- Step 1 -->
                 <div class="method-card reveal delay-100">
+                    <div class="step-number">01</div>
                     <div class="method-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3>1. מיפוי והבנה</h3>
+                    <h3>מיפוי והבנה</h3>
                     <p>אנחנו לא יורים באפלה. קודם כל מבינים איפה הכאבים שלכם: איפה מבזבזים זמן? איפה יש טעויות? ומתאימים את הכלים בדיוק לשם.</p>
                 </div>
+
+                <!-- Step 2 -->
                 <div class="method-card reveal delay-200">
+                    <div class="step-number">02</div>
                     <div class="method-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                    <h3>2. תרגול "על רטוב"</h3>
+                    <h3>תרגול "על רטוב"</h3>
                     <p>לא מדברים על - עושים את. העובדים פותחים את הכלים (ChatGPT, Claude וכו') ומבצעים את משימות היום-יום שלהם, עם הנחיה צמודה.</p>
                 </div>
+
+                <!-- Step 3 -->
                 <div class="method-card reveal delay-300">
+                    <div class="step-number">03</div>
                     <div class="method-icon"><i class="fa-solid fa-sitemap"></i></div>
-                    <h3>3. הטמעה ונהלים</h3>
+                    <h3>הטמעה ונהלים</h3>
                     <p>כדי שזה לא יישאר ידע של עובד בודד, אנחנו יוצרים "זיכרון ארגוני": ספריית פרומפטים, נהלי עבודה מסודרים ותהליכים שניתן לשכפל.</p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -804,6 +965,13 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        // Add hover effect for mobile tap
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('hovered');
+            });
+        });
     </script>
 
 </body>
