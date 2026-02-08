@@ -8,13 +8,11 @@
     <!-- SEO & Meta Tags -->
     <meta name="description" content="הכשרות AI פרקטיות לארגונים בהובלת טל חקוקי. חוסכים זמן, משפרים תהליכים ובונים יכולות פנימיות. מתאים למנהלים, צוותים ומגזר ציבורי.">
     
-    <!-- Open Graph / Facebook & WhatsApp -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <!-- שים לב: עודכן לכתובת החדשה שלך -->
     <meta property="og:url" content="https://practiai.github.io/LP/">
     <meta property="og:title" content="PractiAI | עושים סדר בבינה המלאכותית">
     <meta property="og:description" content="לא עוד הרצאות תיאורטיות. הכשרות מעשיות שמייצרות ערך עסקי מהיום הראשון.">
-    <!-- הוספתי v=2 כדי לרענן את הזיכרון של ווטסאפ -->
     <meta property="og:image" content="https://practiai.github.io/LP/og-image.png?v=2">
 
     <!-- Twitter -->
@@ -331,12 +329,13 @@
             border-radius: 20px;
         }
 
+        /* Hover works on Desktop */
         .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
 
-        /* Mobile support for click/tap */
-        .flip-card.hovered .flip-card-inner {
+        /* Auto-flip class for Mobile Scroll Interaction */
+        .flip-card.auto-flip .flip-card-inner {
             transform: rotateY(180deg);
         }
 
@@ -439,18 +438,25 @@
             z-index: 0;
         }
 
+        /* Desktop Hover */
         .method-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent);
             box-shadow: 0 0 30px rgba(222, 255, 154, 0.1);
         }
 
-        .method-card:hover .step-number {
+        /* Mobile Active Class */
+        .method-card.active-mobile {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(222, 255, 154, 0.15);
+        }
+
+        .method-card:hover .step-number, .method-card.active-mobile .step-number {
             color: rgba(222, 255, 154, 0.1);
             transform: scale(1.1);
         }
 
-        /* Animated border bottom on hover */
+        /* Animated border bottom */
         .method-card::after {
             content: '';
             position: absolute;
@@ -463,7 +469,7 @@
             transition: transform 0.4s ease;
         }
 
-        .method-card:hover::after {
+        .method-card:hover::after, .method-card.active-mobile::after {
             transform: scaleX(1);
         }
 
@@ -483,7 +489,7 @@
             border: 1px solid #333;
         }
 
-        .method-card:hover .method-icon {
+        .method-card:hover .method-icon, .method-card.active-mobile .method-icon {
             background: var(--accent);
             color: #000;
             border-color: var(--accent);
@@ -727,7 +733,7 @@
             <h2 class="section-title reveal">למה הכשרות רגילות לא עובדות?</h2>
             <p class="section-subtitle reveal">רוב ההדרכות נשארות בשלב ההתלהבות. אנחנו מתמקדים בערך.</p>
             
-            <div class="flip-hint reveal"><i class="fa-solid fa-hand-pointer"></i> עברו עם העכבר על הכרטיסים כדי לגלות את הפתרון</div>
+            <div class="flip-hint reveal"><i class="fa-solid fa-hand-pointer"></i> גללו למטה כדי לגלות את הפתרון</div>
 
             <div class="flip-grid">
                 
@@ -1029,23 +1035,39 @@
 
     <!-- Scroll Animation Script -->
     <script>
+        // Check for touch device
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1
+            threshold: 0.2 // Trigger when 20% visible
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    
+                    // Special logic for Mobile Scroll Interaction
+                    if (isTouchDevice) {
+                        if (entry.target.classList.contains('flip-card')) {
+                            // Delay flip slightly so they see the red side first
+                            setTimeout(() => {
+                                entry.target.classList.add('auto-flip');
+                            }, 500); 
+                        }
+                        if (entry.target.classList.contains('method-card')) {
+                            entry.target.classList.add('active-mobile');
+                        }
+                    }
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .flip-card, .method-card').forEach(el => observer.observe(el));
         
-        // Add hover effect for mobile tap
+        // Keep click listener for desktop testing or manual toggle
         document.querySelectorAll('.flip-card').forEach(card => {
             card.addEventListener('click', function() {
                 this.classList.toggle('hovered');
